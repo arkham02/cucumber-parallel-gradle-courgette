@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="1" name="Test Suite" skipped="0" tests="5" time="44.578">
+
+<testcase classname="Feature with DataTable" name="Ensure that a stack overflow question page can be opened using a data table" time="8.889">
+<system-out><![CDATA[When I use the following data table to navigate to a Stack Overflow question page.passed
+Then I verify Stack Overflow question page 1 is opened......................passed
+]]></system-out>
+</testcase>
+
+<testcase classname="Feature 1" name="Ensure that stack overflow question page 1 can be opened" time="8.756">
+<system-out><![CDATA[When I navigate to Stack Overflow question page 1...........................passed
+Then I verify Stack Overflow question page 1 is opened......................passed
+]]></system-out>
+</testcase>
+
+<testcase classname="Feature 1" name="Ensure that stack overflow question page 2 can be opened (force scenario to fail)" time="4.221">
+<failure message="The Stack Overflow page title does not contain the page number: 3" type="java.lang.RuntimeException"><![CDATA[When I navigate to Stack Overflow question page 2...........................passed
+Then I verify Stack Overflow question page 3 is opened......................failed
+
+StackTrace:
+java.lang.RuntimeException: The Stack Overflow page title does not contain the page number: 3
+	at steps.TestSteps.i_verify_Stack_Overflow_question_page_is_opened(TestSteps.java:74)
+	at ✽.I verify Stack Overflow question page 3 is opened(file:///C:/A/Workspace/IntelliJ/Study/cucumber-parallel-gradle-courgette/src/test/resources/features/Feature1.feature:10)
+]]></failure>
+</testcase>
+
+<testcase classname="Feature with Examples" name="Ensure that stack overflow question pages can be opened" time="9.306">
+<system-out><![CDATA[Given I navigate to Stack Overflow..........................................passed
+When I navigate to Stack Overflow question page 3...........................passed
+Then I verify Stack Overflow question page 3 is opened......................passed
+]]></system-out>
+</testcase>
+
+<testcase classname="Feature 2" name="Ensure that stack overflow question page 2 can be opened" time="8.74">
+<system-out><![CDATA[When I navigate to Stack Overflow question page 2...........................passed
+Then I verify Stack Overflow question page 2 is opened......................passed
+]]></system-out>
+</testcase>
+
+</testsuite>

@@ -1,0 +1,61 @@
+
+plugins {
+    id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.24"
+}
+apply plugin: 'java'
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+
+dependencies {
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.11.0'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.11.0'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-ie-driver', version: '3.11.0'
+
+    testCompile 'io.github.prashant-ramcharan:courgette-jvm:5.11.0'
+    testCompile 'io.github.prashant-ramcharan:webdriver-binary-downloader:1.2.2'
+}
+
+cucumberReports {
+    outputDir = file('build/cucumber-report-jenkins/cucumber.html')
+    buildId = '0'
+    reports = files('build/cucumber-report/cucumber.json')
+}
+
+tasks.withType(Test) {
+    systemProperties = System.getProperties()
+    systemProperties.remove("java.endorsed.dirs")
+}
+
+task runFeaturesUsingJUnit(type: Test) {
+    include '**/suites/junit/FeatureSuite.class'
+    outputs.upToDateWhen { false }
+}
+
+task runScenariosUsingJUnit(type: Test) {
+    include '**/suites/junit/ScenarioSuite.class'
+    outputs.upToDateWhen { false }
+}
+
+task runFeaturesUsingTestNG(type: Test) {
+    useTestNG()
+
+    include '**/suites/testng/FeatureSuite.class'
+    outputs.upToDateWhen { false }
+}
+
+task runScenariosUsingTestNG(type: Test) {
+    useTestNG()
+
+    include '**/suites/testng/ScenarioSuite.class'
+    outputs.upToDateWhen { false }
+}
+
+
